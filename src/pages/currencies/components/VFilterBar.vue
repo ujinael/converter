@@ -9,8 +9,8 @@
 @change="onChange"
     >
     <option :value="null">не выбрано</option>
-    <option v-for="option in options" :value="option" :key="option">
-        {{option}}
+    <option v-for="column in columns" :value="column.value" :key="column.name">
+        {{column.name}}
     </option>
     </select>
     </div>
@@ -31,23 +31,23 @@ v-model="searchTerm"
 import { useCurrenciesStore } from '@/stores/modules/currencies/use-currencies.store';
 import { ref } from 'vue';
 import { useDebounce } from '@/composition';
-
+type Columns ="CharCode"|"Name"|null
 const store = useCurrenciesStore()
 const onChange = ()=>{ 
        searchTerm.value = ''
-// if(searchColumn.value === null){
     store.onFilter(searchTerm.value,searchColumn.value)
-// }
 }
 const onSearch = ()=>{
     store.onFilter(searchTerm.value,searchColumn.value)
 } 
 const debounce = useDebounce(onSearch,300)
-
+const columns:Array<{name:string,value:Columns}> = [
+    {name:"Пара",value:"CharCode"},
+    {name:"Название",value:"Name"}
+]
 const searchTerm = ref('')
-const searchColumn= ref<"CharCode"|"Name"|null> (null)
+const searchColumn= ref<Columns> (null)
 
-const options:Array<"CharCode"|"Name"> = ["CharCode","Name"]
 </script>
 <style scoped lang="scss">
 @import '@/assets/control.mixines.scss';
