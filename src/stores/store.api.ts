@@ -132,7 +132,6 @@ import {
         const data = text && JSON.parse(text);
         if (!response.ok) {
           if (response.status === 401) {
-            // auto logout if 401 response returned from api
             localStorage.removeItem('account');
   
             router.push('/auth');
@@ -144,14 +143,11 @@ import {
             name: 'apiError',
             message: error,
           };
-          // const store = useGlobalStore()
-          // store.setError(apiError)
+        
           throw apiError;
         }
         return data;
       });
     }
   }
-  
-  // export const vapor = new Api(process.env.VUE_APP_VAPOR)
-  
+    
