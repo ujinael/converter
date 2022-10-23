@@ -1,6 +1,6 @@
 # converter
 
-ссылка на дерлой приложения на firebase:
+ссылка на деплой приложения на firebase:
 https://valute-converter-demo.web.app
 
 ## Recommended IDE Setup
