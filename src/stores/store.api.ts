@@ -18,8 +18,11 @@ import {
   
   export class Api {
     static shared = () => {
-      const PORT = import.meta.env.VITE_SERVER_PORT || 5173
-      const HOST = import.meta.env.VITE_REMOTE_SERVER_HOST || `http://localhost`
+      const  isProd = import.meta.env.PROD
+      const PORT = import.meta.env.VITE_SERVER_PORT || ''
+      const HOST = import.meta.env.VITE_SERVER_HOST || `http://localhost`
+   if(isProd)
+   return new Api(import.meta.env.VITE_REMOTE_SERVER_HOST)
       return new Api(HOST+`:${PORT}/api`);
       };
     private rootPath: string;
@@ -36,97 +39,18 @@ import {
       queryParams: Array<Query> = [],
       constructor: any,
     ): Promise<Entity> {
-      let url = new URL(`${this.rootPath}${this.path}`);
+      let url = new URL(`${this.rootPath}${this.path}`);      
       queryParams.forEach((q) => url.searchParams.append(q.key, q.value));
       const response: string = await fetch(url.toString(), {
-        mode: 'cors',
+        mode: "cors",
         method: 'GET',
-        credentials: 'include',
-      }).then((response) => {        
+      }).then((response) => {                
         return this.handleResponse(response);
       });
       return await plainToInstance<Entity, string>(constructor, response);
     }
   
-    async delete(query?: Query): Promise<any> {
-      let url = new URL(this.rootPath + this.path);
-      let request = new Request(url.toString(), {
-        headers: {
-          Accept: 'application/json;charset=utf-8',
-          Origin: '*',
-          'Access-Control-Max-Age': '600',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        method: 'DELETE',
-      });
-      return await fetch(request).then((response) => {
-        return this.handleResponse(response);
-      });
-    }
-    async post<Save, Created>(entity: Save, constructor: any): Promise<Created> {
-      let request = new Request(this.rootPath + this.path, {
-        headers: {
-          Accept: 'application/json;charset=utf-8',
-          Origin: 'http://localhost:3000',
-          'Access-Control-Max-Age': '600',
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        method: 'POST',
-        body: JSON.stringify(entity),
-      });
-      const reponse: string = await fetch(request).then((response) =>
-        this.handleResponse(response),
-      );
   
-      return await plainToClass(constructor, reponse);
-    }
-    async update<Update, Entity>(
-      entity: Update,
-      constructor: any,
-      query?: Query,
-    ): Promise<Entity> {
-      let url = new URL(this.rootPath + this.path);
-      if (query) url.searchParams.append(query.key, query.value);
-      let request = new Request(url.toString(), {
-        headers: {
-          Accept: 'application/json;charset=utf-8',
-          Origin: '*',
-          'Access-Control-Max-Age': '600',
-          'Content-Type': 'application/json;charset=utf-8',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        method: 'PUT',
-        body: JSON.stringify(entity),
-      });
-      const response: string = await fetch(request).then((response) => {
-        return this.handleResponse(response);
-      });
-      return await plainToInstance<Entity, string>(constructor, response);
-    }
-    async upload<F extends FormData, Entity>(
-      entity: F,
-      constructor: any,
-      query?: Query,
-    ): Promise<Entity> {
-      let url = new URL(this.rootPath + this.path);
-      if (query) url.searchParams.append(query.key, query.value);
-      const myHeaders = new Headers();
-      myHeaders.append('Content-Type', 'multipart/form-data');
-      let request = new Request(url.toString(), {
-        mode: 'cors',
-        credentials: 'include',
-        method: 'POST',
-        body: entity,
-      });
-      const response: string = await fetch(request).then((response) => {
-        return this.handleResponse(response);
-      });
-      return await plainToInstance<Entity, string>(constructor, response);
-    }
     private handleResponse(response: Response): Promise<any> {
       return response.text().then((text) => {
         const data = text && JSON.parse(text);

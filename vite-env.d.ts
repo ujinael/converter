@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_REMOTE_SERVER_HOST: string
   readonly VITE_REMOTE_SERVER_PORT: string
   readonly VITE_SERVER_PORT: string
+  readonly VITE_SERVER_HOST: string
 
 }
 

@@ -16,13 +16,16 @@
         </tr>
       </thead>
       <tbody class="currency_table__body">
-        <VTableRow
+        <VTableRow v-if="!loading"
           class="currency_table__row"
           v-for="valute in valutes"
           :key="valute.ID"
           :valute="valute"
         >
         </VTableRow>
+        <tr v-else>
+          <td class="loader" colspan="6">Загрузка...</td>
+        </tr>
       </tbody>
     </table>
   </div>
@@ -30,11 +33,13 @@
 <script setup lang="ts">
 import { useCurrenciesStore } from "@/stores/modules/currencies/use-currencies.store";
 import { CurrencyValue } from "@stores/modules/currencies/entity/currency";
+import { storeToRefs } from "pinia";
 import VTableRow from "./VTableRow.vue";
-const props = defineProps<{
+defineProps<{
   valutes: Array<CurrencyValue>;
 }>();
 const store = useCurrenciesStore();
+const {loading} = storeToRefs(store)
 </script>
 <style scoped lang="scss">
 @import "../styles/currency-page.styles.scss";
@@ -51,5 +56,9 @@ const store = useCurrenciesStore();
   cursor: pointer;
   background-color: rgb(190, 225, 237);
   color: #09c;
+}
+.loader{
+  text-align: center;
+  padding: 1rem;
 }
 </style>

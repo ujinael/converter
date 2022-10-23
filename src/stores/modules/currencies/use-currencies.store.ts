@@ -47,11 +47,14 @@ this.searchTerm = searchTerm
     },
   async fetchCurrencies(){
     try {
+      this.loading = true
        const currency = await Api.shared().child('daily_json.js').get<CurrencyValues>([],CurrencyValues)
-  this.currency = currency 
+    this.loading = false
+    this.currency = currency 
+
 return currency
     } catch (error) {
-      console.log('Ooops something wrong!!!');
+      alert('Remote network error!!!')
       throw new Error(`${error}`)
     }
  

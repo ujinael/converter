@@ -10,14 +10,18 @@ const REMOTE_PORT = env.VITE_REMOTE_SERVER_PORT || ''
   return {
   plugins: [vue()],
   envDir:fileURLToPath(new URL(".", import.meta.url)),
+  
   server: {
     port: +PORT,
     hmr:{overlay:false},
+    
     proxy: {
       "/api": {
         target: `${HOST}:${REMOTE_PORT}` ,
-        rewrite: (path) => {          
-         return path.replace(/^\/api/, "")
+        secure:false,
+        rewrite: (path) => {  
+          const newPath = path.replace(/^\/api/, "")                  
+         return newPath
       
       }
         ,
