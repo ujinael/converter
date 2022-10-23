@@ -50,7 +50,7 @@ const {loading} = storeToRefs(store)
   border: 1px solid #09c;
   padding: 0 .2rem;
   color: white;
-  border-radius: 5px;
+  border-radius: var(--common_border_radius);
 }
 .switch_button:hover {
   cursor: pointer;

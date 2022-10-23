@@ -4,14 +4,14 @@
         background-color: white;
 padding: 1rem;
 box-shadow: 2px 2px 8px lightgrey;
-border-radius: 5px;
+border-radius: var(--common_border_radius);
 width: 100%;
 
     }
     width: 100%;
     border: 1px solid gray;
     background-color: white;
-    border-radius: 5px;
+    border-radius: var(--common_border_radius);
     height: 150px;
     padding: .5rem;
     display: grid;
@@ -33,6 +33,10 @@ outline: none;
         display: inline-block;
         font-size: 30px;
         padding: .5rem;
+        width: inherit;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     border: none;
     }
     &__input{

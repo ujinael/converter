@@ -1,6 +1,6 @@
 .table_wrapper{
     height: 100%;
-    border-radius: 5px;
+    border-radius: var(--common_border_radius);
         border: 1px solid gray;
         overflow: scroll;
 
@@ -15,7 +15,7 @@
     top:0;
     left: 0;
     background-color: white;
-    border-radius: 5px 5px 5px 5px;
+    border-radius: var(--common_border_radius);
 
 }
 &__row{
@@ -27,7 +27,7 @@
 
 }
 &__head{
-    border-radius: 5px 5px 5px 5px;
+    border-radius: var(--common_border_radius) 5px 5px 5px;
 }
 &__body_cell,&__head_cell{
     padding: .5rem;

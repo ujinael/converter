@@ -29,6 +29,10 @@ gap: 1rem;
 display: inline-block;
 max-width: 2rem;
 font-size: large;
+border-radius: var(--common_border_radius);
+border: 1px solid gray;
+padding: 0 .2rem;
+background-color: white;
 }
 @media screen and (min-width:599px) {
     .page{
