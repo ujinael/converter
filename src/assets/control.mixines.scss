@@ -1,0 +1,9 @@
+@mixin control-mixin{
+    display: inline-block;
+padding: .25rem .5rem;
+border-radius: 5px;
+border: 1px solid gray;
+font-size: .8em;
+height: 1.8rem;
+line-height: 1.3em;
+}

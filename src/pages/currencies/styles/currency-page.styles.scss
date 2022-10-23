@@ -1,0 +1,42 @@
+.table_wrapper{
+    height: 100%;
+    border-radius: 5px;
+        border: 1px solid gray;
+        overflow: scroll;
+
+}
+.currency_table{
+    border-collapse: collapse;
+    height: fit-content;
+    width: 100%;
+    position: relative;
+    &__head{
+   position: sticky;
+    top:0;
+    left: 0;
+    background-color: white;
+    border-radius: 5px 5px 5px 5px;
+
+}
+&__row{
+    border-bottom: 1px solid gray;
+ 
+}
+&__body>.currency_table__row:last-of-type{
+    border-bottom: 1px solid transparent;
+
+}
+&__head{
+    border-radius: 5px 5px 5px 5px;
+}
+&__body_cell,&__head_cell{
+    padding: .5rem;
+text-align: center;
+white-space: nowrap;
+overflow: hidden;
+max-width: 200px;
+text-overflow: ellipsis;
+}
+}
+
+

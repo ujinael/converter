@@ -1,0 +1,48 @@
+    @import "@/assets/control.mixines.scss";
+.valute_component{
+    &__wrapper{
+        background-color: white;
+padding: 1rem;
+box-shadow: 2px 2px 8px lightgrey;
+border-radius: 5px;
+width: 100%;
+
+    }
+    width: 100%;
+    border: 1px solid gray;
+    background-color: white;
+    border-radius: 5px;
+    height: 150px;
+    padding: .5rem;
+    display: grid;
+    align-content: space-between;
+&__select {
+  @include control-mixin;
+  margin-bottom: 10px;
+}
+&__select:focus{
+outline: none;
+}
+    &__value{
+        display: grid;
+    }
+    &__label{
+        color: gray;
+    }
+    &__input,.valute_component__calculated_value{
+        display: inline-block;
+        font-size: 30px;
+        padding: .5rem;
+    border: none;
+    }
+    &__input{
+            border-bottom: 2px solid lightgreen;
+    }
+    &__input:focus{
+        outline: none;
+    }
+    &__cource{
+        color: gray;
+        font-size: small;
+    }
+}
